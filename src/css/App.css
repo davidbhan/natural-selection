@@ -1,0 +1,36 @@
+body {
+  background-color: #ffffff;
+}
+h1, h2, p, ul, li {
+  font-family: sans-serif;
+}
+ul.header li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+}
+ul.header {
+  position: fixed;
+  padding: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+.button-header {
+  background-color: lightgray;
+  padding: 15px;
+  text-align: center;
+  display: inline-block;
+  margin: 0px 12px;
+  border-radius: 50%
+}
+.tooltip-red {
+  --balloon-color: beige;
+}
+.tooltip-big-text {
+  --balloon-font-size: 15px;
+}
+
+.active .button-header{
+  background-color: rgba(16, 16, 16, 0.95);
+}
