@@ -114,12 +114,12 @@ export default function Ess() {
               Their payoff values are computed and then stored. After each round, we choose a random number of birds, <i>k</i>, that 
               will each be randomly compared to another bird. If the other bird
               received a higher payoff, then the original bird will switch strategies to that of the other bird.
-              We can run this simulation for n rounds and see how the population proportions tend to stabilize after a certain
+              We can run this simulation for <i>n</i> rounds and see how the population proportions tend to stabilize after a certain
               number of rounds.              
             </Box>
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
               <br />
-              To start, let us choose v = {v}, d = {d}, p = {p}, q = {q}, k = {k}, and n = {n} with the payoff matrix show below.
+              To start, let us choose <i>v</i> = {v}, <i>d</i> = {d}, <i>p</i> = {p}, <i>q</i> = {q}, <i>k</i> = {k}, and <i>n</i> = {n} with the payoff matrix show below.
             </Box>
           </Typography>
           <Box>

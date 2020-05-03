@@ -91,8 +91,8 @@ export default function Hawkdove() {
               </Box>
               <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
                 <br />
-                Suppose that the value of the fruit is v = 100 and that the cost of losing a fight
-                is d = 5. If you choose to fight (Hawk) and the other person chooses to negotiate (Dove),
+                Suppose that the value of the fruit is <i>v</i> = 100 and that the cost of losing a fight
+                is <i>d</i> = 5. If you choose to fight (Hawk) and the other person chooses to negotiate (Dove),
                 you can aggressively claim the value of fruit for yourself at no cost. 
                 If you both choose to negotiate (Dove),
                 the value of the fruit will be shared equally among the two of you. Lastly, if you 
@@ -114,7 +114,7 @@ export default function Hawkdove() {
                 In this case, it is clear that you should always play a hawk strategy since you are 
                 always better off regardless of what your opponents plays. But what if the value of the fruit
                 or the damage of losing a fight changes? 
-                For example, what if we set the fruit value to v = 5 and d = 20 instead? 
+                For example, what if we set the fruit value to <i>v</i> = 5 and <i>d</i> = 20 instead? 
                 Try adjusting the values of v and d below to see their effects on the payoff matrix.
                 <br />
               </Box>

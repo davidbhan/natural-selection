@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Tooltip from '@material-ui/core/Tooltip';
 import Table from '@material-ui/core/Table';
-
+import Chart from './SimulationGraph.js'
 
 class Bird {
   constructor(strategy, payoff) {
@@ -108,6 +108,7 @@ export class ImitationSimulation extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log(this.props.q)
     population = initializePopulation(this.props.p, this.props.q)
     popStats = []
 
@@ -122,8 +123,9 @@ export class ImitationSimulation extends React.Component {
 
   render() {
     return (
-      <Grid>
-        <TableContainer component={Paper} >
+      <Grid component={Paper}>
+        <Chart popStats={popStats}/>
+        <TableContainer >
           <Table size="small" aria-label="sticky table" >
           <TableHead>
               <TableRow >

@@ -128,10 +128,18 @@ export default function EssSandbox() {
               Input the starting parameters of the population of your choice and then hit the 
               start simulation button once you are satisfied with the payoff matrix and population 
               parameters of your choice. Note that higher values of k will allow the population to change 
-              far quicker, but the final result will be less stable. (There is some weird behavior with
-              autoupdating, so be sure to click the run simulation button each time you change the parameters!)
+              far quicker, but the final result will be less stable. 
+              <br />
             </Box>
           </Typography>
+          <Box>
+            <br />
+          </Box>
+              <Grid className={classes.paper}>
+              There is some weird behavior with
+              autoupdating, so be sure to click the run simulation button each time you change the parameters! If anything breaks, just refresh the page :)
+                
+              </Grid>
           <Box>
             <br />
           </Box>
@@ -188,19 +196,20 @@ export default function EssSandbox() {
           </Box>
 
           <Grid>
-            { showResults ? <Grid className={classes.paper}>
+            { showResults ? 
+            <Grid className={classes.paper}>
               <ImitationSimulation v={parseInt(v)} d={parseInt(d)} p={parseInt(p)} q={parseFloat(q)} k={parseInt(k)} n={parseInt(n)} run={run}/>
               <Typography component="p">
-            <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
-              <br />
-              The simulation is a powerful tool that shows off the convergence of a population of strategies
-              over time. But what if totally new strategies entered the population? What if an animal was willing
-              to put up a fighting display at a certain cost to try to scare away the doves?
-              <br />
-            </Box>
-          </Typography>             
-              </Grid>
-             : null }
+                <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+                  <br />
+                  The simulation is a powerful tool that shows off the convergence of a population of strategies
+                  over time. But what if totally new strategies entered the population? What if an animal was willing
+                  to put up a fighting display at a certain cost to try to scare away the doves?
+                  <br />
+                </Box>
+              </Typography>             
+            </Grid>
+            : null }
           </Grid>
 
 

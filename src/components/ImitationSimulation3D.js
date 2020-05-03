@@ -111,10 +111,10 @@ export class ImitationSimulation3D extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
-
+    this.state = {
+      run: this.props.run
+    };
     population = initializePopulation(this.props.p, this.props.q, this.props.r)
-    console.log(population)
     popStats = []
 
     for (const i of Array(this.props.n).keys()) {
@@ -126,6 +126,22 @@ export class ImitationSimulation3D extends React.Component {
       updatePopulation(population, this.props.k);
     }
   }
+
+  componentDidUpdate() {
+    console.log(this.props.q)
+    population = initializePopulation(this.props.p, this.props.q, this.props.r)
+    popStats = []
+
+    for (const i of Array(this.props.n).keys()) {
+      let [hawk, crow, dove, hawkRatio, crowRatio, doveRatio] = countPopulation(population);
+      var x = new PopulationStatistics(i, hawk, crow, dove, hawkRatio, crowRatio, doveRatio);
+      console.log(x)
+      popStats.push(x)
+      updatePayoffs(population, this.props.v, this.props.c, this.props.d);
+      updatePopulation(population, this.props.k);
+    }
+  }
+
 
   render() {
     return (

@@ -89,7 +89,7 @@ export default function HawkdoveSandbox() {
               play the hawk strategy. Over time, the population of hawks skyrockets, while the population
               of doves drop. The optimal balance of hawks and doves in the ESS. 
               Let's see if we can come up with a set of rules to determine the 
-              ESS depending on the values of v and d.
+              ESS depending on the values of <i>v</i> and <i>d</i>.
             </Box>
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
               <br />
@@ -117,7 +117,7 @@ export default function HawkdoveSandbox() {
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
               <br />
               Now what if the value of the fruit were equal to the damage that you would take if you
-              lose a fight? Let us take a look at the payoff matrix where v = d = 10. In this case, 
+              lose a fight? Let us take a look at the payoff matrix where <i>v</i> = <i>d</i> = 10. In this case, 
               if you were playing against a hawk, your gain from the encounter would be 0 regardless
               of whether you use a hawk strategy or a dove strategy. However, if you were matched up
               against a dove, you would come out ahead by playing the hawk strategy. Thus, the hawk strategy
@@ -163,7 +163,7 @@ export default function HawkdoveSandbox() {
           <Typography component="p" >
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
               <br />
-              In the last case, where the damage you risk taking is larger than the value of the food (i.e. v > d),
+              In the last case, where the damage you risk taking is larger than the value of the food (i.e. <i>v</i> > <i>d</i>),
               there is no pure evolutionary stable strategy. Intead, we can compute the ideal proportion
               of Hawk and Dove strategies using a bit of basic algebra as well as the knowledge that 
               the evolutionary stable strategy must have the same or better payoff against any other strategy.

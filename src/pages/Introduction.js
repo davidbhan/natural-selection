@@ -21,6 +21,8 @@ import { NavLink } from "react-router-dom";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
+      The University of Hong Kong 
+      <br />
       Released May 2020
     </Typography>
   );
@@ -55,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0),
     backgroundColor: theme.palette.secondary.main,
   },
+
 }));
 
 
@@ -137,7 +140,11 @@ export default function Introduction() {
           </Box>
 
           <Fade in={true} timeout={3000}>
-          <Box>
+          <Grid container className={classes.paper}>
+            <Grid>
+                  Skip ahead to the tools here!
+                  <br />
+            </Grid>
             <BottomNavigation
               onChange={(event, newValue) => {
                 setValue(newValue);
@@ -149,30 +156,35 @@ export default function Introduction() {
               <BottomNavigationAction label="Mock Fighting Simulation" value="fakefightingsandbox" icon={<SportsKabaddiIcon />} />
 
             </BottomNavigation>
-          </Box>
+          </Grid>
           </Fade>
           <Box>
             <br />
           </Box>
-          
+          <Box>
+            <br />
+          </Box>
+          <Box>
+            <br />
+          </Box>
           <Fade in={true} timeout={3000}>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="https://www.linkedin.com/in/davidbhan/" variant="body2">
-                    David Boli Han
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="https://webapp.science.hku.hk/sr4/servlet/enquiry?Type=Course&course_code=MATH3911" variant="body2">
-                    {"MATH3911 Game Theory"}
-                  </Link>
-                </Grid>
+          <Grid container>
+            <Grid container>
+              <Grid item xs>
+                <Link href="https://www.linkedin.com/in/davidbhan/" variant="body2">
+                  David Boli Han
+                </Link>
               </Grid>
-          </Fade>
-          <Fade in={true} timeout={3000}>
-            <Box mt={3} >
-              <Copyright />
-            </Box>
+              <Grid item>
+                <Link href="https://webapp.science.hku.hk/sr4/servlet/enquiry?Type=Course&course_code=MATH3911" variant="body2">
+                  {"MATH3911 Game Theory"}
+                </Link>
+              </Grid>
+            </Grid>
+            <Grid container className={classes.paper}>
+                <Copyright />
+            </Grid>
+          </Grid>
           </Fade>
 
         </div>

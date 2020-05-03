@@ -129,7 +129,14 @@ export default function FakefightingSandbox() {
           <Box>
             <br />
           </Box>
-
+              <Grid className={classes.paper}>
+              There is some weird behavior with
+              autoupdating, so be sure to click the run simulation button each time you change the parameters! If anything breaks, just refresh the page :)
+                
+              </Grid>
+          <Box>
+            <br />
+          </Box>
           <form autoComplete="off" className={classes.field}>
               <TextField id="value" defaultValue={parseInt(v)} type="number" label="Value (v)" onChange={handleVChange}/>
               <TextField id="damage" defaultValue={parseInt(d)} type="number" label="Damage (d)" onChange={handleDChange}/>

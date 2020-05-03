@@ -29,6 +29,9 @@ function setValue(newValue) {
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
+      The University of Hong Kong 
+      <br />
+
       Released May 2020
     </Typography>
   );
