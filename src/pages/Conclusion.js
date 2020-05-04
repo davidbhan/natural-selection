@@ -16,7 +16,7 @@ import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
 import SportsHandballIcon from '@material-ui/icons/SportsHandball';
 import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
 import Slide from '@material-ui/core/Slide';
-
+import { NavLink } from "react-router-dom";
 
 
 function setValue(newValue) {
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'left',
   },
   paper: {
-    margin: theme.spacing(8, 4),
+    margin: theme.spacing(4, 4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -89,47 +89,40 @@ export default function Conclusion() {
     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
       <div className={classes.paper}>
         <Fade in={true} timeout={2500}>
-          <Avatar className={classes.avatar}>
-            <PetsIcon />
-          </Avatar>
+            <NavLink to="/" style={{ textDecoration: 'none' }}>
+              <Avatar className={classes.avatar}>
+                <PetsIcon />
+              </Avatar>
+            </NavLink>
         </Fade>
 
         <Fade in={true} timeout={2500}>
-      <Typography component="p">
         <Box lineHeight={2}>
+      <Typography component="p">
+          <br />
           Unbeknowest to the participating animals, all of them were playing by the rules
           of the complex game of life. Unlike them, however, you have the chance and the ability
           to have a clearer idea of the world around you. 
-        </Box>
-        <Box>
           <br />
-        </Box>
-        <Box lineHeight={2}>
+          <br />
           Obviously, the rules of the game shown here are far
           simpler than those found in the real world, but this formaulation of thinking can be used
           to explain not just the behavior of animals, but also of humans. (For example, why are children
           more likely to engage in fighting over treats and toys than adults? Think about the perceived cost of 
           fighting and value of treats in children compared to adults.)
-        </Box>
-
-        <Box>
           <br />
-        </Box>
-        <Box lineHeight={2}>
+          <br />
           Now, it is extraordinarily difficult to quantify the exact value of food and the cost of 
           injuries in the real world. Utility is not only subject to each individual, but it is also
           relative to available opportunities. Nonetheless, the inability to completely accurately
           quantify value mathematicallly does not stop us from creating and understanding useful models
           of the world around us, as is widely done in economics. 
-        </Box>
-        <Box>
           <br />
-        </Box>
-        <Box lineHeight={2}>
+          <br />
           Nature and the world around us can be such a seemingly complex environment. Take a step back,
           however, and we can begin to see the rules that govern things. 
-        </Box>
       </Typography>
+        </Box>
     </Fade>
 
 
@@ -140,25 +133,21 @@ export default function Conclusion() {
         <Box>
           <Fade in={true} timeout={3000}>
             <a href="https://plato.stanford.edu/entries/game-evolutionary/">
-              <Button formaction="">
+              <Button formAction="">
                 Continue your learning
               </Button>
             </a>
           </Fade>
         </Box>
 
-        <Box>
-          <br />
-        </Box>
-        <Box>
-          <br />
-        </Box>
+
 
         <Fade in={true} timeout={3000}>
         <Grid container className={classes.paper}>
             <Grid>
+              <i>
                   Go back to the tools here!
-                  <br />
+                  </i> <br />
             </Grid>
           <BottomNavigation
             onChange={(event, newValue) => {
@@ -173,9 +162,7 @@ export default function Conclusion() {
           </BottomNavigation>
         </Grid>
         </Fade>
-        <Box>
-          <br />
-        </Box>
+
         
         <Fade in={true} timeout={3000}>
           <Box mt={3} >

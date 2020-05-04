@@ -34,7 +34,7 @@ export class Navigation extends React.Component {
     render() {
       return (
       <Grid>
-        <Box fullWidth={true}>
+        <Box>
         <br />
         <NavLink to={this.props.nextURL} style={{ textDecoration: 'none' }}>
           <Button size="large" fullWidth={true} variant="contained" color="primary">

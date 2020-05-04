@@ -12,6 +12,7 @@ import PetsIcon from '@material-ui/icons/Pets';
 import React, {useState, useEffect} from 'react';
 import Navigation from '../components/Footer.js';
 import PayoffMatrix from '../components/PayoffMatrix2D.js';
+import { NavLink } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -71,50 +72,51 @@ export default function HawkdoveSandbox() {
 
       <Grid item component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <PetsIcon />
-          </Avatar>
+        <NavLink to="/" style={{ textDecoration: 'none' }}>
+              <Avatar className={classes.avatar}>
+                <PetsIcon />
+              </Avatar>
+            </NavLink>
           <Typography component="h1" variant="h5" >
             <Box lineHeight={2}>
               Calculating the Optimal Strategies
             </Box>
           </Typography>
-          <Typography component="p" >
             <Box lineHeight={2} m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p" >
               The key to determining the optimal strategy is to find one that is "evolutionary stable".
               But what exactly does that mean? 
               Suppose we have a population of birds that always play dove. One day a single bird decides to 
               play the hawk strategy, and proceeds to dominate every other bird it encounters.
               As the bird get more food and resources, other birds see its success and also
               play the hawk strategy. Over time, the population of hawks skyrockets, while the population
-              of doves drop. The optimal balance of hawks and doves in the ESS. 
+              of doves drop. The optimal balance of hawks and doves that we eventually reach is the ESS. 
               Let's see if we can come up with a set of rules to determine the 
               ESS depending on the values of <i>v</i> and <i>d</i>.
-            </Box>
-            <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+              <br />
               <br />
               Look at the original payoff matrix below. It is clear that when the 
               the values of the first row are greater than the values of the second row,
               a pure hawk strategy is the way to go regardless of what the others are doing.
               This gives us our first condition of finding an ESS.
-            </Box>
           </Typography>
+            </Box>
           <Box>
             <br />
           </Box>
           <PayoffMatrix v={parseInt(v)} d={parseInt(d)}/>
-          <Typography component="p">
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p">
               <br />
               <i>
               1. When row 1 > row 2 in both columns, a pure hawk strategy is an evolutionary stable strategy.
               </i>
               <br />
-            </Box>
           </Typography>
+            </Box>
               
-          <Typography component="p" >
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p" >
               <br />
               Now what if the value of the fruit were equal to the damage that you would take if you
               lose a fight? Let us take a look at the payoff matrix where <i>v</i> = <i>d</i> = 10. In this case, 
@@ -123,45 +125,45 @@ export default function HawkdoveSandbox() {
               against a dove, you would come out ahead by playing the hawk strategy. Thus, the hawk strategy
               is always at least as good as the dove strategy, and sometimes better. This gives 
               our second condition for finding an ESS. 
-            </Box>
           </Typography>
+            </Box>
           <Box>
             <br />
           </Box>
           <PayoffMatrix v={10} d={10}/>
-          <Typography component="p">
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p">
               <br />
               <i>
               2. When row 1 = row 2 in one column, and row 1 > row 2 in the other column, a pure hawk strategy is evolutionary stable.
               </i>
               <br />
-            </Box>
           </Typography>
+            </Box>
 
-          <Typography component="p" >
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p" >
               <br />
               One might wonder what would happen in the edge case if somehow both the value and damage were set to 0.
               In this situation, there is no ESS since each strategy is equally as good the next.
-            </Box>
           </Typography>
+            </Box>
           <Box>
             <br />
           </Box>
           <PayoffMatrix v={0} d={0}/>
-          <Typography component="p">
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p">
               <br />
               <i>
               3. When row 1 = row 2 in both columns, no strategy is evolutionary stable.
               </i>
               <br />
-            </Box>
           </Typography>
+            </Box>
 
-          <Typography component="p" >
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p" >
               <br />
               In the last case, where the damage you risk taking is larger than the value of the food (i.e. <i>v</i> > <i>d</i>),
               there is no pure evolutionary stable strategy. Intead, we can compute the ideal proportion
@@ -171,34 +173,34 @@ export default function HawkdoveSandbox() {
               show the ideal ratio of hawks to doves is <i>v/d</i> hawks to <i>(1 - v/d)</i> doves. In other words, 
               the population would be resistant to change if the population consisted of a proportion 
               of <i>v/d</i> hawks.
-            </Box>
           </Typography>
+            </Box>
           <Box>
             <br />
           </Box>
           <PayoffMatrix v={10} d={100}/>
-          <Typography component="p">
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p">
               <br />
               <i>
               4. When row 1 {"<"} row 2 in one column, and row 1 > row 2 in the other column, the evolutionary 
               stable stategy will be a mixture of v/d hawks and (1-v/d) doves.
               </i>
               <br />
-            </Box>
           </Typography>
+            </Box>
 
 
 
-          <Typography component="p">
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p">
               <br />
               Now that you have an idea of how we can compute the ESS, take some time to 
-              play around with different values of v and d in our sandbox and see their corresponding
+              play around with different values of <i>v</i> and <i>d</i> in our sandbox and see their corresponding
               evolutionary stable strategy.
               <br />
-            </Box>
           </Typography>
+            </Box>
 
           <Navigation buttonText={"try out the sandbox"} nextURL={"/hawkdovesandbox"} setURL={setURL}/>
 

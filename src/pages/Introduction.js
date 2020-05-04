@@ -83,9 +83,11 @@ export default function Introduction() {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Fade in={true} timeout={2500}>
-            <Avatar className={classes.avatar}>
-              <PetsIcon />
-            </Avatar>
+          <NavLink to="/" style={{ textDecoration: 'none' }}>
+              <Avatar className={classes.avatar}>
+                <PetsIcon />
+              </Avatar>
+            </NavLink>
           </Fade>
 
           <Fade in={true} timeout={2500}>
@@ -97,36 +99,30 @@ export default function Introduction() {
           </Fade>
 
           <Fade in={true} timeout={2500}>
-            <Typography component="p">
               <Box lineHeight={2}>
+            <Typography component="p" >
                 Have you ever watched a nature documentary and thought to yourself, why don't animals
                 simply share food with one another? Or alternatively, why don't they completely eliminate
                 their enemies to prevent future conflict? 
-              </Box>
 
-              <Box>
                 <br />
-              </Box>
-              <Box lineHeight={2}>
+                <br />
                 When animals fight, be it over foods or mates, we usually see a lot of posturing and mock 
                 fighting that only moderately injures the participants. How do animals know when to stop
                 fighting? And, what drives this behavior?
-              </Box>
-              <Box>
                 <br />
-              </Box>
-              <Box lineHeight={2}>
+                <br />
                 Part of the answer lies in something called <b>Evolutionary Stable Strategies</b>. Let us
                 take a close look at what exactly this is, and how it plays out in the world around us.
-              </Box>
             </Typography>
+              </Box>
           </Fade>
 
           <Box>
             <br />
           </Box>
 
-          <Box fullWidth={true}>
+          <Box>
             <Fade in={true} timeout={3000}>
               <NavLink to="/hawkdove" style={{ textDecoration: 'none' }}>
                 <Button size="large" fullWidth={true} variant="contained" color="primary">
@@ -136,17 +132,11 @@ export default function Introduction() {
             </Fade>
           </Box>
 
-          <Box>
-            <br />
-          </Box>
-          <Box>
-            <br />
-          </Box>
 
           <Fade in={true} timeout={3000}>
           <Grid container className={classes.paper}>
             <Grid>
-                  Skip ahead to the tools here!
+                  <i>Skip ahead to the tools here!</i>
                   <br />
             </Grid>
             <BottomNavigation
@@ -162,15 +152,8 @@ export default function Introduction() {
             </BottomNavigation>
           </Grid>
           </Fade>
-          <Box>
-            <br />
-          </Box>
-          <Box>
-            <br />
-          </Box>
-          <Box>
-            <br />
-          </Box>
+
+
           <Fade in={true} timeout={3000}>
           <Grid container>
             <Grid container className={classes.paper}>

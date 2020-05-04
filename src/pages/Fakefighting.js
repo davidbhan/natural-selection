@@ -3,6 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,7 +12,7 @@ import PetsIcon from '@material-ui/icons/Pets';
 import React from 'react';
 import Navigation from '../components/Footer.js';
 import PayoffMatrix3D from '../components/PayoffMatrix3D.js';
-import Fade from '@material-ui/core/Fade'
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,21 +77,22 @@ export default function Fakefighting() {
       <Fade in={true} timeout={1500}>
         <Grid item component={Paper} elevation={6} square>
           <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <PetsIcon />
-            </Avatar>
+          <NavLink to="/" style={{ textDecoration: 'none' }}>
+              <Avatar className={classes.avatar}>
+                <PetsIcon />
+              </Avatar>
+            </NavLink>
             <Typography component="h1" variant="h5" >
               <Box lineHeight={2}>
                 Scaring Away the Doves
               </Box>
             </Typography>
-            <Typography component="p" >
               <Box lineHeight={2} m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+            <Typography component="p" >
                 Sometimes, animals may be willing to make a display and fight until they incur
                 a certain level of damage. We will call animals who use this strategy crows, and 
                 the cost that they are willing to fight up to <i>c</i>.
-              </Box>
-              <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+                <br />
                 <br />
                 Once again, we suppose the value of the fruit is v = 100 and that the cost of losing a fight
                 is d = 5. However, now we have a new crow strategy who is willing to fight until a cost, c = 1, is
@@ -101,13 +103,13 @@ export default function Fakefighting() {
                 
                 <br />
                 <br />
-              </Box>
             </Typography>
+              </Box>
 
             <PayoffMatrix3D v={parseInt(v)} d={parseInt(d)} c={parseInt(c)}/>
 
-            <Typography component="p">
               <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+            <Typography component="p">
                 <br />
                 Clearly it can pay off to be a crow rather than a dove in certain situations. 
                 Try adjusting the values in the form below to see its effect on the payoff matrix above.
@@ -115,8 +117,8 @@ export default function Fakefighting() {
                 in this scenario, we always assume c > 0 and d > c. If c = 0, the the crow is just a dove.
                 If c > d, then we can simply change the labels for the hawk and the crow.)
                 <br />
-              </Box>
             </Typography>
+              </Box>
                 
 
             <form autoComplete="off" className={classes.field}>
@@ -125,8 +127,8 @@ export default function Fakefighting() {
               <TextField id="cost" defaultValue={parseInt(c)} type="number" label="Cost" onChange={handleCChange}/>
             </form>
 
-            <Typography component="p">
               <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+            <Typography component="p">
                 <br />
                 In a multiplayer game, it is possible for there to be multiple evolutionary stable strategies, and it's computation
                 is not as straightforward as in a two person game. Instead, let's look at simulating a multistrategy
@@ -135,9 +137,11 @@ export default function Fakefighting() {
                 of the game. Of course, there is a bit of randomness as well due to the nature of the simulation.
                 Let's take a look at how this would work.
                 <br />
-              </Box>
             </Typography>
-
+              </Box>
+              <Box>
+            <br />
+          </Box>
             <Navigation buttonText={"Simulating a multistrategy population"} nextURL={"/fakefightingsimulation"} setURL={setURL}/>
 
             </div>

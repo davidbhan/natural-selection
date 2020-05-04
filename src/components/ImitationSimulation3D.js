@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Tooltip from '@material-ui/core/Tooltip';
 import Table from '@material-ui/core/Table';
-
+import Chart3D from './SimulationGraph3D'
 
 class Bird {
   constructor(strategy, payoff) {
@@ -104,41 +104,40 @@ var countPopulation = (population) => {
   return [hawk, crow, dove, (hawk)/(population.length), (crow)/(population.length), (dove)/(population.length)];
 }
 
-var popStats = [];
-var population;
+
 
 export class ImitationSimulation3D extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      run: this.props.run
+      run: this.props.run,
+      popStats: this.getPopStats()
     };
-    population = initializePopulation(this.props.p, this.props.q, this.props.r)
-    popStats = []
+
+  }
+
+  getPopStats = () => {
+    var population = initializePopulation(this.props.p, this.props.q, this.props.r)
+    var popStats = []
 
     for (const i of Array(this.props.n).keys()) {
       let [hawk, crow, dove, hawkRatio, crowRatio, doveRatio] = countPopulation(population);
       var x = new PopulationStatistics(i, hawk, crow, dove, hawkRatio, crowRatio, doveRatio);
-      console.log(x)
       popStats.push(x)
       updatePayoffs(population, this.props.v, this.props.c, this.props.d);
       updatePopulation(population, this.props.k);
     }
+
+    return popStats
   }
 
   componentDidUpdate() {
-    console.log(this.props.q)
-    population = initializePopulation(this.props.p, this.props.q, this.props.r)
-    popStats = []
-
-    for (const i of Array(this.props.n).keys()) {
-      let [hawk, crow, dove, hawkRatio, crowRatio, doveRatio] = countPopulation(population);
-      var x = new PopulationStatistics(i, hawk, crow, dove, hawkRatio, crowRatio, doveRatio);
-      console.log(x)
-      popStats.push(x)
-      updatePayoffs(population, this.props.v, this.props.c, this.props.d);
-      updatePopulation(population, this.props.k);
+    if (this.state.run != this.props.run) {
+      this.setState({
+        run: this.props.run,
+        popStats: this.getPopStats()
+      })
     }
   }
 
@@ -146,6 +145,11 @@ export class ImitationSimulation3D extends React.Component {
   render() {
     return (
       <Grid>
+                <Chart3D popStats={this.state.popStats} run={this.state.run}/>
+                <Grid>
+          <br />
+          <br />
+        </Grid>
         <TableContainer component={Paper} >
           <Table size="small" aria-label="sticky table" >
           <TableHead>
@@ -160,7 +164,7 @@ export class ImitationSimulation3D extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {popStats.map((row) => (
+              {this.state.popStats.map((row) => (
                 <TableRow key={'round' + row.round}>
                   <TableCell component="th" scope="row">
                     {row.round}

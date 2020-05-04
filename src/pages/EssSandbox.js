@@ -1,19 +1,20 @@
-import { TextField, Fade } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PetsIcon from '@material-ui/icons/Pets';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Navigation from '../components/Footer.js';
-import PayoffMatrix from '../components/PayoffMatrix2D.js';
 import ImitationSimulation from '../components/ImitationSimulation.js';
-import Button from '@material-ui/core/Button';
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import PayoffMatrix from '../components/PayoffMatrix2D.js';
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,8 +107,8 @@ export default function EssSandbox() {
   const [run, setRun] = React.useState(false)
   const [showResults, setShowResults] = React.useState(false)
   function computeSimulation() {
-    setRun(!run)
     setShowResults(true)
+    setRun(!run)
   }
 
   return (
@@ -115,27 +116,27 @@ export default function EssSandbox() {
       <CssBaseline />
       <Grid item component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <PetsIcon />
-          </Avatar>
+        <NavLink to="/" style={{ textDecoration: 'none' }}>
+              <Avatar className={classes.avatar}>
+                <PetsIcon />
+              </Avatar>
+            </NavLink>
           <Typography component="h1" variant="h5" >
             <Box lineHeight={2}>
               Evolutionary Stable Strategy Imitation Simulation
             </Box>
           </Typography>
-          <Typography component="p" >
             <Box lineHeight={2} m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p" >
               Input the starting parameters of the population of your choice and then hit the 
               start simulation button once you are satisfied with the payoff matrix and population 
               parameters of your choice. Note that higher values of k will allow the population to change 
               far quicker, but the final result will be less stable. 
               <br />
-            </Box>
           </Typography>
-          <Box>
-            <br />
-          </Box>
-              <Grid className={classes.paper}>
+            </Box>
+
+              <Grid className={classes.paper} >
               Since all the computation is done in your browser, there may be a bit of lag with large inputs. Be sure to click the run simulation button each time you change the parameters! If anything breaks, just refresh the page :)
                 
               </Grid>
@@ -154,19 +155,24 @@ export default function EssSandbox() {
 
           <PayoffMatrix v={parseInt(v)} d={parseInt(d)}/>
 
-
-          <Typography component="p">
+          <Box>
+            <br />
+          </Box>
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p">
               <br />
               <b>
               Expected Stable Strategy: 
               {getESS(v, d)}
               </b>
               <br />
-            </Box>
           </Typography>
+            </Box>
               
-
+            <Box>
+              <br />
+            <br />
+          </Box>
 
           <form autoComplete="off" className={classes.field}>
             <TextField id="population" defaultValue={parseInt(p)} type="number" label="Population (p)" onChange={handlePChange}/>
@@ -191,22 +197,21 @@ export default function EssSandbox() {
 
           <Box>
             <br />
-            <br />
           </Box>
 
           <Grid>
             { showResults ? 
             <Grid className={classes.paper}>
               <ImitationSimulation v={parseInt(v)} d={parseInt(d)} p={parseInt(p)} q={parseFloat(q)} k={parseInt(k)} n={parseInt(n)} run={run}/>
-              <Typography component="p">
                 <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+                  <Typography component="p">
                   <br />
                   The simulation is a powerful tool that shows off the convergence of a population of strategies
                   over time. But what if totally new strategies entered the population? What if an animal was willing
                   to put up a fighting display at a certain cost to try to scare away the doves?
                   <br />
+                  </Typography>             
                 </Box>
-              </Typography>             
             </Grid>
             : null }
           </Grid>

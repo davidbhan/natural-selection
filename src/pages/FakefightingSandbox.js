@@ -1,19 +1,20 @@
 import { TextField } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PetsIcon from '@material-ui/icons/Pets';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Navigation from '../components/Footer.js';
-import PayoffMatrix3D from '../components/PayoffMatrix3D.js';
 import ImitationSimulation3D from '../components/ImitationSimulation3D.js';
-import Button from '@material-ui/core/Button';
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import PayoffMatrix3D from '../components/PayoffMatrix3D.js';
+import { NavLink } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -113,19 +114,22 @@ export default function FakefightingSandbox() {
       <CssBaseline />
       <Grid item component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <PetsIcon />
-          </Avatar>
+        <NavLink to="/" style={{ textDecoration: 'none' }}>
+              <Avatar className={classes.avatar}>
+                <PetsIcon />
+              </Avatar>
+            </NavLink>
           <Typography component="h1" variant="h5" >
             <Box lineHeight={2}>
               Multiplayer Simulation
             </Box>
           </Typography>
-          <Typography component="p" >
             <Box lineHeight={2} m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p" >
             Input the starting parameters of the population of your choice and then hit the start simulation button once you are satisfied with the payoff matrix and population parameters of your choice. Note that higher values of k will allow the population to change far quicker, but the final result will be less stable.
-            For more stable results, try <i>k</i> = 10 and <i>n</i> = 2000.</Box>
+            For more stable results, try <i>k</i> = 10 and <i>n</i> = 2000.
           </Typography>
+            </Box>
           <Box>
             <br />
           </Box>
@@ -181,14 +185,14 @@ export default function FakefightingSandbox() {
           <Grid>
             { showResults ? <Grid className={classes.paper}>
             <ImitationSimulation3D v={parseInt(v)} d={parseInt(d)} c={parseInt(c)} p={parseInt(p)} q={parseFloat(q)} r={parseFloat(r)} k={parseInt(k)} n={parseInt(n)} run={run}/>
-              <Typography component="p">
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+              <Typography component="p">
               <br />
               This is all pretty cool, but so what?
 
               <br />
-            </Box>
           </Typography>             
+            </Box>
               </Grid>
              : null }
           </Grid>

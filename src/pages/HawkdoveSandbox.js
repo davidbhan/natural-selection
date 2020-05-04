@@ -12,6 +12,7 @@ import PetsIcon from '@material-ui/icons/Pets';
 import React from 'react';
 import Navigation from '../components/Footer.js';
 import PayoffMatrix from '../components/PayoffMatrix2D.js';
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -89,21 +90,23 @@ export default function HawkdoveSandbox() {
 
       <Grid item component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <PetsIcon />
-          </Avatar>
+        <NavLink to="/" style={{ textDecoration: 'none' }}>
+              <Avatar className={classes.avatar}>
+                <PetsIcon />
+              </Avatar>
+            </NavLink>
           <Typography component="h1" variant="h5" >
             <Box lineHeight={2}>
               Hawk Dove Game ESS Calculator
             </Box>
           </Typography>
+            <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
           <Typography component="p" >
 
-            <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
               <br />
-              Take some time to experiment with different values of v and d before continuing on!
-            </Box>
+              Take some time to experiment with different values of <i>v</i> and <i>d</i> to see the expected ESS before continuing on!
           </Typography>
+            </Box>
 
           
           <form autoComplete="off" className={classes.field}>
@@ -116,28 +119,28 @@ export default function HawkdoveSandbox() {
 
           <PayoffMatrix v={parseInt(v)} d={parseInt(d)}/>
 
-          <Typography component="p">
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p">
               <br />
               <b>
               Evolutionary Stable Strategy: 
               {getESS(v, d)}
               </b>
               <br />
-            </Box>
           </Typography>
+            </Box>
               
 
 
 
-          <Typography component="p">
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p">
               <br />
               Okay, this is just a theoretical model. How would things look if we 
               actually ran a population simulation?
               <br />
-            </Box>
           </Typography>
+            </Box>
 
           <Navigation buttonText={"population simuation"} nextURL={"/ess"} setURL={setURL}/>
 

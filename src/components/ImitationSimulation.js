@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Tooltip from '@material-ui/core/Tooltip';
 import Table from '@material-ui/core/Table';
+import Box from '@material-ui/core/Box';
 import Chart from './SimulationGraph.js'
 
 class Bird {
@@ -85,18 +86,20 @@ var countPopulation = (population) => {
   return [hawk, dove, (hawk)/(hawk+dove)];
 }
 
-var popStats = [];
-var population;
-
 export class ImitationSimulation extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      run: this.props.run
+      run: this.props.run,
+      popStats: this.getPopStats()
     };
-    population = initializePopulation(this.props.p, this.props.q)
-    popStats = []
+
+  }
+
+  getPopStats = () => {
+    var population = initializePopulation(this.props.p, this.props.q)
+    var popStats = [];
 
     for (const i of Array(this.props.n).keys()) {
       let [hawk, dove, hawkRatio] = countPopulation(population);
@@ -105,50 +108,52 @@ export class ImitationSimulation extends React.Component {
       updatePayoffs(population, this.props.v, this.props.d);
       updatePopulation(population, this.props.k);
     }
+    return popStats
   }
 
   componentDidUpdate() {
-    console.log(this.props.q)
-    population = initializePopulation(this.props.p, this.props.q)
-    popStats = []
-
-    for (const i of Array(this.props.n).keys()) {
-      let [hawk, dove, hawkRatio] = countPopulation(population);
-      var x = new PopulationStatistics(i, hawk, dove, hawkRatio);
-      popStats.push(x)
-      updatePayoffs(population, this.props.v, this.props.d);
-      updatePopulation(population, this.props.k);
+    if (this.state.run != this.props.run) {
+      this.setState({
+        run: this.props.run,
+        popStats: this.getPopStats()
+      })
     }
   }
 
   render() {
     return (
-      <Grid component={Paper}>
-        <Chart popStats={popStats}/>
-        <TableContainer >
-          <Table size="small" aria-label="sticky table" >
-          <TableHead>
-              <TableRow >
-                <TableCell><b>Round</b></TableCell>
-                <TableCell align="right"><b>Hawks</b></TableCell>
-                <TableCell align="right"><b>Doves</b></TableCell>
-                <TableCell align="right"><b>Hawk Proportion</b></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {popStats.map((row) => (
-                <TableRow key={'round' + row.round}>
-                  <TableCell component="th" scope="row">
-                    {row.round}
-                  </TableCell>
-                  <TableCell align="right">{row.hawk}</TableCell>
-                  <TableCell align="right">{row.dove}</TableCell>
-                  <TableCell align="right">{row.hawkRatio}</TableCell>
+      <Grid container justify="center">
+        <Chart popStats={this.state.popStats} run={this.state.run}/>
+        <Grid>
+          <br />
+          <br />
+        </Grid>
+        <Grid component={Paper}>
+          <TableContainer >
+            <Table size="small" aria-label="sticky table" >
+            <TableHead>
+                <TableRow >
+                  <TableCell><b>Round</b></TableCell>
+                  <TableCell align="right"><b>Hawks</b></TableCell>
+                  <TableCell align="right"><b>Doves</b></TableCell>
+                  <TableCell align="right"><b>Hawk Proportion</b></TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {this.state.popStats.map((row) => (
+                  <TableRow key={'round' + row.round}>
+                    <TableCell component="th" scope="row">
+                      {row.round}
+                    </TableCell>
+                    <TableCell align="right">{row.hawk}</TableCell>
+                    <TableCell align="right">{row.dove}</TableCell>
+                    <TableCell align="right">{row.hawkRatio}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
       </Grid>
     );
   }

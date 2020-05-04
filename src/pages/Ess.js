@@ -1,19 +1,20 @@
-import { TextField, Fade } from '@material-ui/core';
+import { Fade } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PetsIcon from '@material-ui/icons/Pets';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Navigation from '../components/Footer.js';
-import PayoffMatrix from '../components/PayoffMatrix2D.js';
 import ImitationSimulation from '../components/ImitationSimulation.js';
-import Button from '@material-ui/core/Button';
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import PayoffMatrix from '../components/PayoffMatrix2D.js';
+import { NavLink } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -93,22 +94,23 @@ export default function Ess() {
       <Grid item component={Paper} elevation={6} square>
 
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <PetsIcon />
-          </Avatar>
+            <NavLink to="/" style={{ textDecoration: 'none' }}>
+              <Avatar className={classes.avatar}>
+                <PetsIcon />
+              </Avatar>
+            </NavLink>
           <Typography component="h1" variant="h5" >
             <Box lineHeight={2}>
-              Rules of the Simulation
+              Rules of the Imitation Simulation
             </Box>
           </Typography>
-          <Typography component="p" >
             <Box lineHeight={2} m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p" >
               In this simulation, we have a value, <i>v</i>, for the value of food and a damage, <i>d</i>,
               for the damage the loser of a fight incurs. Furthemore, we have the initial population
               size, <i>p</i>, that denotes the amount of birds, and a value, <i>q</i>, that denotes the initial proportion
               of the population that uses a hawk strategy. 
-            </Box>
-            <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+              <br />
               <br />
               Each round, the birds will all be paired against a random matchup to play the game.
               Their payoff values are computed and then stored. After each round, we choose a random number of birds, <i>k</i>, that 
@@ -116,19 +118,18 @@ export default function Ess() {
               received a higher payoff, then the original bird will switch strategies to that of the other bird.
               We can run this simulation for <i>n</i> rounds and see how the population proportions tend to stabilize after a certain
               number of rounds.              
-            </Box>
-            <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+              <br />
               <br />
               To start, let us choose <i>v</i> = {v}, <i>d</i> = {d}, <i>p</i> = {p}, <i>q</i> = {q}, <i>k</i> = {k}, and <i>n</i> = {n} with the payoff matrix show below.
-            </Box>
           </Typography>
+            </Box>
           <Box>
             <br />
           </Box>
           <PayoffMatrix v={parseInt(v)} d={parseInt(d)}/>
 
-          <Typography component="p">
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p">
               <br />
               In other words, we start of with a population {p} birds, {p*q} of which play a hawk strategy. After each
               round, {k} birds randomly check out the payoff of another bird and switches to their strategy if the other bird's payoff is 
@@ -136,37 +137,40 @@ export default function Ess() {
               Note, as we discussed earlier, we should predict that the ESS would be a population full of hawks. Let us run the simulation
               and see how it turns out! (Note that the simulation performance depends on random variable changes, so will change slightly each time.) 
               <br />
-            </Box>
           </Typography>
-          <Box>
-            <br />
-          </Box>
-
-
-          <FormControlLabel
-            control={
-              <Button variant="outlined" color="primary" onClick={computeSimulation}>
-                Run Simulation
-              </Button>}
-          />
-
+            </Box>
           <Box>
             <br />
           </Box>
 
           <Grid>
+            { !showResults ? 
+          <FormControlLabel
+          control={
+            <Button variant="outlined" color="primary" onClick={computeSimulation}>
+              Run Simulation
+            </Button>}
+        />
+             : null }
+          </Grid>
+
+
+
+
+
+          <Grid>
             { showResults ? <Grid className={classes.paper}>
               <ImitationSimulation v={parseInt(v)} d={parseInt(d)} p={parseInt(p)} q={parseFloat(q)} k={parseInt(k)} n={parseInt(n)}/>
-              <Typography component="p">
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+              <Typography component="p">
               <br />
               That's pretty cool! We see that the ratio of hawks
               converges to 1, just as we expected from our calculations.
               Let's try out different starting values in our sandbox to how the population
               proportion convertes to our predicted ESS.
               <br />
-            </Box>
           </Typography>              
+            </Box>
               </Grid>
              : null }
           </Grid>

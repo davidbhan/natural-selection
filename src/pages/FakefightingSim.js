@@ -1,19 +1,19 @@
-import { TextField } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PetsIcon from '@material-ui/icons/Pets';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Navigation from '../components/Footer.js';
-import PayoffMatrix3D from '../components/PayoffMatrix3D.js';
 import ImitationSimulation3D from '../components/ImitationSimulation3D.js';
-import Button from '@material-ui/core/Button';
-import FormControlLabel from '@material-ui/core/FormControlLabel'
+import PayoffMatrix3D from '../components/PayoffMatrix3D.js';
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -88,34 +88,37 @@ export default function FakefightingSim() {
     setN(e.target.value);
   }
 
+  const [run, setRun] = React.useState(false)
   const [showResults, setShowResults] = React.useState(false)
   function computeSimulation() {
     setShowResults(true)
+    setRun(!run)
+    console.log('ESS RUNS ONCE', run)
   }
-
   return (
     <Container component="main" maxWidth="md" className={classes.root}>
       <CssBaseline />
       <Grid item component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <PetsIcon />
-          </Avatar>
+        <NavLink to="/" style={{ textDecoration: 'none' }}>
+              <Avatar className={classes.avatar}>
+                <PetsIcon />
+              </Avatar>
+            </NavLink>
           <Typography component="h1" variant="h5" >
             <Box lineHeight={2}>
               Multiplayer Simulation
             </Box>
           </Typography>
-          <Typography component="p" >
             <Box lineHeight={2} m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p" >
               Similar to the first simulation, we have a value, <i>v</i>, for the value of food and a damage, <i>d</i>,
               for the damage the loser of a fight incurs. Furthemore, we have the initial population
               size, <i>p</i>, of the birds, and a value, <i>q</i>, that denotes the initial proportion
               of the population that uses a hawk strategy. Only now, we also include a value, <i>c</i>, for the cost
               that a crow is willing to take and a value, <i>r</i> for the initial population size of the crows. Note that 
               the sum of <i>q</i> and <i>r</i> must be less than 1. 
-            </Box>
-            <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+              <br />
               <br />
               Each round, the birds will all be paired against a random matchup to play the game.
               Their payoff values are computed and then stored. After each round, we choose a random number of birds, <i>k</i>, that 
@@ -124,19 +127,18 @@ export default function FakefightingSim() {
               the population proportion converge faster, but the convergence will be less stable.
               We can run this simulation for <i>n</i> rounds and see how the population proportions tend to stabilize after a certain
               number of rounds.              
-            </Box>
-            <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+              <br />
               <br />
               To start, let us choose <i>v</i> = {v}, <i>d</i> = {d}, <i>c</i> = {c}, <i>p</i> = {p}, <i>q</i> = {q}, <i>r</i> = {r}, <i>k</i> = {k}, and <i>n</i> = {n} with the payoff matrix show below.
-            </Box>
           </Typography>
+            </Box>
           <Box>
             <br />
           </Box>
           <PayoffMatrix3D v={parseInt(v)} d={parseInt(d)} c={parseInt(c)}/>
 
-          <Typography component="p">
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+          <Typography component="p">
               <br />
               In other words, we start of with a population {p} birds, {p*q} of which play a hawk strategy, {p*r} of which play a crow strategy, 
               and {p - p*q - p*r} of which play a dove strategy. After each round, {k} birds randomly check out the payoff of another bird and switches to their strategy if the other bird's payoff is 
@@ -144,28 +146,29 @@ export default function FakefightingSim() {
                Let us run the simulation
               and see how it turns out! (Note that the simulation performance depends on random variable changes, so will change slightly each time.) 
               <br />
-            </Box>
           </Typography>
-          <Box>
-            <br />
-          </Box>
-
-          <FormControlLabel
-            control={
-              <Button variant="outlined" color="primary" onClick={computeSimulation}>
-                Run Simulation
-              </Button>}
-          />
-
+            </Box>
           <Box>
             <br />
           </Box>
 
           <Grid>
+            { !showResults ? 
+          <FormControlLabel
+          control={
+            <Button variant="outlined" color="primary" onClick={computeSimulation}>
+              Run Simulation
+            </Button>}
+        />
+             : null }
+          </Grid>
+
+
+          <Grid>
             { showResults ?  <Grid className={classes.paper}>
-              <ImitationSimulation3D v={parseInt(v)} d={parseInt(d)} c={parseInt(c)} p={parseInt(p)} q={parseFloat(q)} r={parseFloat(r)} k={parseInt(k)} n={parseInt(n)}/>
-              <Typography component="p">
+              <ImitationSimulation3D v={parseInt(v)} d={parseInt(d)} c={parseInt(c)} p={parseInt(p)} q={parseFloat(q)} r={parseFloat(r)} k={parseInt(k)} n={parseInt(n)} run={run}/>
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+              <Typography component="p">
               <br />
               That's pretty cool! In case you caught on beforehand, we see that the values in row 1 are greater or equal to those in
               rows 2 and 3 for every column, so Hawk is clearly a theoretically stable strategy. 
@@ -174,8 +177,8 @@ export default function FakefightingSim() {
               Let's try out different starting values in our sandbox to how the population
               proportion convertes to our predicted ESS.
               <br />
-            </Box>
           </Typography>
+            </Box>
                   </Grid>
              : null }
           </Grid>
