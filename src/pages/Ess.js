@@ -47,10 +47,12 @@ export default function Ess() {
   
   const [v, setV] = React.useState(100)
   const [d, setD] = React.useState(5);
-  const [p, setP] = React.useState(500)
-  const [q, setQ] = React.useState(.10);
-  const [k, setK] = React.useState(100)
-  const [n, setN] = React.useState(50);
+  const [p, setP] = React.useState(50)
+  const [q, setQ] = React.useState(.3);
+  const [r, setR] = React.useState(200)
+  const [e, setE] = React.useState(-10)
+  const [k, setK] = React.useState(-10)
+  const [n, setN] = React.useState(25);
 
   function setURL(newValue) {
     var currentURL = window.location.pathname;
@@ -62,24 +64,6 @@ export default function Ess() {
     window.scrollTo(0, 0)
   }, [])
 
-  function handleVChange(e) {
-    setV(e.target.value);
-  }
-  function handleDChange(e) {
-    setD(e.target.value);
-  }
-  function handlePChange(e) {
-    setP(e.target.value);
-  }
-  function handleQChange(e) {
-    setQ(e.target.value);
-  }
-  function handleKChange(e) {
-    setK(e.target.value);
-  }
-  function handleNChange(e) {
-    setN(e.target.value);
-  }
 
   const [showResults, setShowResults] = React.useState(false)
   function computeSimulation() {
@@ -101,7 +85,7 @@ export default function Ess() {
             </NavLink>
           <Typography component="h1" variant="h5" >
             <Box lineHeight={2}>
-              Rules of the Imitation Simulation
+              Rules of the Simulation
             </Box>
           </Typography>
             <Box lineHeight={2} m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
@@ -112,15 +96,20 @@ export default function Ess() {
               of the population that uses a hawk strategy. 
               <br />
               <br />
-              Each round, the birds will all be paired against a random matchup to play the game.
-              Their payoff values are computed and then stored. After each round, we choose a random number of birds, <i>k</i>, that 
-              will each be randomly compared to another bird. If the other bird
-              received a higher payoff, then the original bird will switch strategies to that of the other bird.
-              We can run this simulation for <i>n</i> rounds and see how the population proportions tend to stabilize after a certain
-              number of rounds.              
+              Each bird starts off with 0 payoff. Each round, the birds will all be paired against a random matchup to play the game.
+              Their payoff values are computed and then added to their previous count. Furthermore, each
+              round will see the birds sustain a penalty, <i>e</i>, for the general expendature and cost of living.
+               After each round, we check the bird's total payoff (think of it as life points). If their
+               payoff is above a reproductive threshold, <i>r</i>, the bird will reproduce and we add a new bird
+               of the same strategy to the population. If the bird is below a kill threshold, <i>k</i>, then
+               that bird dies. However, to speed up computation, rather than removing the bird from the population, we instead
+               have it switch strategies and reset its total payoff to 0.
+              We run this simulation for <i>n</i> rounds and see how the population proportions tend to stabilize over time (though
+              stabilization also depends heavily on the input parameters).              
               <br />
               <br />
-              To start, let us choose <i>v</i> = {v}, <i>d</i> = {d}, <i>p</i> = {p}, <i>q</i> = {q}, <i>k</i> = {k}, and <i>n</i> = {n} with the payoff matrix show below.
+              To start, let us choose <i>v</i> = {v}, <i>d</i> = {d}, <i>p</i> = {p}, <i>q</i> = {q}
+              , <i>e</i> = {e}, <i>r</i> = {r}, <i>k</i> = {k}, and <i>n</i> = {n} with the payoff matrix show below.
           </Typography>
             </Box>
           <Box>
@@ -132,8 +121,7 @@ export default function Ess() {
           <Typography component="p">
               <br />
               In other words, we start of with a population {p} birds, {p*q} of which play a hawk strategy. After each
-              round, {k} birds randomly check out the payoff of another bird and switches to their strategy if the other bird's payoff is 
-              better. We run this for {n} rounds, and see how the population proportion changes over time. 
+              round, birds will have their total payoffs checked. They accordingly reproduce, do nothing, or "die" and switch strategies. We run this for {n} rounds, and see how the population proportion changes over time. 
               Note, as we discussed earlier, we should predict that the ESS would be a population full of hawks. Let us run the simulation
               and see how it turns out! (Note that the simulation performance depends on random variable changes, so will change slightly each time.) 
               <br />
@@ -147,7 +135,7 @@ export default function Ess() {
             { !showResults ? 
           <FormControlLabel
           control={
-            <Button variant="outlined" color="primary" onClick={computeSimulation}>
+            <Button variant="contained" color="secondary" onClick={computeSimulation}>
               Run Simulation
             </Button>}
         />
@@ -160,7 +148,7 @@ export default function Ess() {
 
           <Grid>
             { showResults ? <Grid className={classes.paper}>
-              <ImitationSimulation v={parseInt(v)} d={parseInt(d)} p={parseInt(p)} q={parseFloat(q)} k={parseInt(k)} n={parseInt(n)}/>
+              <ImitationSimulation v={parseInt(v)} d={parseInt(d)} p={parseInt(p)} q={parseFloat(q)} r={parseFloat(r)} e={parseFloat(e)} k={parseFloat(k)} n={parseInt(n)}/>
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
               <Typography component="p">
               <br />
@@ -171,13 +159,24 @@ export default function Ess() {
               <br />
           </Typography>              
             </Box>
+
+
+            <Box>
+<br />
+<NavLink to={"/esssandbox"} style={{ textDecoration: 'none' }}>
+  <Button size="large" fullWidth={true} variant="contained" color="primary">
+    {"try out the sandbox"}
+  </Button>
+</NavLink>
+</Box>
               </Grid>
+
              : null }
           </Grid>
 
 
 
-          <Navigation buttonText={"try out the sandbox"} nextURL={"/esssandbox"} setURL={setURL}/>
+          <Navigation buttonText={"try out the sandbox"} nextURL={"/esssandbox"} setURL={setURL}  showNext={!showResults}/>
 
           </div>
       </Grid>

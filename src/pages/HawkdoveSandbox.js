@@ -142,7 +142,7 @@ export default function HawkdoveSandbox() {
           </Typography>
             </Box>
 
-          <Navigation buttonText={"population simuation"} nextURL={"/ess"} setURL={setURL}/>
+          <Navigation buttonText={"population simuation"} nextURL={"/ess"} setURL={setURL}  showNext={false}/>
 
           </div>
       </Grid>

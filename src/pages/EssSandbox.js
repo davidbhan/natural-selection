@@ -7,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Fade from '@material-ui/core/Fade';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PetsIcon from '@material-ui/icons/Pets';
@@ -50,13 +51,16 @@ export default function EssSandbox() {
   const boxMarginTop = 0;
   const boxMarginBottom = 0;
   
+
   const [v, setV] = React.useState(2)
   const [d, setD] = React.useState(5);
-  const [p, setP] = React.useState(500)
-  const [q, setQ] = React.useState(.10);
-  const [z, setZ] = React.useState(.90);
-  const [k, setK] = React.useState(50)
-  const [n, setN] = React.useState(100);
+  const [p, setP] = React.useState(100)
+  const [q, setQ] = React.useState(.8);
+  const [r, setR] = React.useState(8)
+  const [e, setE] = React.useState(-.1)
+  const [z, setZ] = React.useState(.2);
+  const [k, setK] = React.useState(-5)
+  const [n, setN] = React.useState(20);
 
   function setURL(newValue) {
     var currentURL = window.location.pathname;
@@ -101,6 +105,12 @@ export default function EssSandbox() {
   function handleKChange(e) {
     setK(e.target.value);
   }
+  function handleEChange(e) {
+    setE(e.target.value);
+  }
+  function handleRChange(e) {
+    setR(e.target.value);
+  }
   function handleNChange(e) {
     setN(e.target.value);
   }
@@ -114,6 +124,8 @@ export default function EssSandbox() {
   return (
     <Container component="main" maxWidth="md" className={classes.root}>
       <CssBaseline />
+      <Fade in={true} timeout={1500}>
+
       <Grid item component={Paper} elevation={6} square>
         <div className={classes.paper}>
         <NavLink to="/" style={{ textDecoration: 'none' }}>
@@ -123,7 +135,7 @@ export default function EssSandbox() {
             </NavLink>
           <Typography component="h1" variant="h5" >
             <Box lineHeight={2}>
-              Evolutionary Stable Strategy Imitation Simulation
+              Evolutionary Stable Strategy Sandbox
             </Box>
           </Typography>
             <Box lineHeight={2} m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
@@ -137,7 +149,9 @@ export default function EssSandbox() {
             </Box>
 
               <Grid className={classes.paper} >
-              Since all the computation is done in your browser, there may be a bit of lag with large inputs. Be sure to click the run simulation button each time you change the parameters! If anything breaks, just refresh the page :)
+              <b>DO NOT INPUT EXTREMELY HIGH NUMBERS OTHERWISE YOUR BROWSER MAY RUN OUT OF MEMORY AND CRASH!</b>
+              
+              Be sure to click the run simulation button each time you change the parameters.
                 
               </Grid>
           <Box>
@@ -158,30 +172,34 @@ export default function EssSandbox() {
           <Box>
             <br />
           </Box>
-            <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
-          <Typography component="p">
-              <br />
-              <b>
-              Expected Stable Strategy: 
-              {getESS(v, d)}
-              </b>
-              <br />
-          </Typography>
+        <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
+                <Typography component="p">
+                    <br />
+                    <b>
+                    Expected Stable Strategy: 
+                    {getESS(v, d)}
+                    </b>
+                    <br />
+                </Typography>
             </Box>
               
-            <Box>
-              <br />
+          <Box>
+            <br />
             <br />
           </Box>
 
           <form autoComplete="off" className={classes.field}>
             <TextField id="population" defaultValue={parseInt(p)} type="number" label="Population (p)" onChange={handlePChange}/>
-            <TextField id="learningRate" defaultValue={parseInt(k)} type="number" label="Learning Size (k)" onChange={handleKChange}/>
             <TextField id="rounds" defaultValue={parseInt(n)} type="number" label="Num. Rounds (n)" onChange={handleNChange}/>
           </form>
           <form autoComplete="off" className={classes.field}>
             <TextField id="hawks" defaultValue={parseFloat(q)} type="number" label="Hawk Ratio (q)" onChange={handleQChange}/>
-            <TextField disabled id="doves" value={parseFloat(z)} variant="filled" label="Dove Ratio"/>
+            <TextField disabled id="doves" value={parseFloat(z)} type="number" label="Dove Ratio"/>
+          </form>
+          <form autoComplete="off" className={classes.field}>
+          <TextField id="learningRate" defaultValue={parseFloat(k)} type="number" label="Kill Threshold (k)" onChange={handleKChange}/>
+            <TextField id="learningRate" defaultValue={parseFloat(r)} type="number" label="Reproduce Threshold (r)" onChange={handleRChange}/>
+            <TextField id="learningRate" defaultValue={parseFloat(e)} type="number" label="Effort Cost (e)" onChange={handleEChange}/>
           </form>
           <Box>
             <br />
@@ -190,7 +208,7 @@ export default function EssSandbox() {
 
           <FormControlLabel
             control={
-              <Button variant="outlined" color="primary" onClick={computeSimulation}>
+              <Button variant="contained" color="secondary" onClick={computeSimulation}>
                 Run Simulation
               </Button>}
           />
@@ -202,17 +220,30 @@ export default function EssSandbox() {
           <Grid>
             { showResults ? 
             <Grid className={classes.paper}>
-              <ImitationSimulation v={parseInt(v)} d={parseInt(d)} p={parseInt(p)} q={parseFloat(q)} k={parseInt(k)} n={parseInt(n)} run={run}/>
+              <ImitationSimulation v={parseInt(v)} d={parseInt(d)} p={parseInt(p)} q={parseFloat(q)} r={parseFloat(r)} e={parseFloat(e)} k={parseFloat(k)} n={parseInt(n)} run={run}/>
                 <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
                   <Typography component="p">
                   <br />
-                  The simulation is a powerful tool that shows off the convergence of a population of strategies
-                  over time. But what if totally new strategies entered the population? What if an animal was willing
+                  Note that the population does not always converge to the expected evolutionary stable strategy.
+                  This is because the rules of the simulation are a more complex game and introduce variations
+                  such as kill threshold and a reproductive threshold. To see the simulation converge
+                  to an ESS, set <i>e</i> = 0 and set the reproductive threshold, <i>r</i>, sufficiently high.
+                  The simulation is a powerful tool that shows off the how a population of strategies
+                  changes over time. But what if totally new strategies entered the population? What if an animal was willing
                   to put up a fighting display at a certain cost to try to scare away the doves?
                   <br />
                   </Typography>             
                 </Box>
+                <Box>
+            <br />
+            <NavLink to={"/fakefighting"} style={{ textDecoration: 'none' }}>
+              <Button size="large" fullWidth={true} variant="contained" color="primary">
+                {"incorporating mock fighting strategies"}
+              </Button>
+            </NavLink>
+            </Box>
             </Grid>
+
             : null }
           </Grid>
 
@@ -221,10 +252,11 @@ export default function EssSandbox() {
 
 
 
-          <Navigation buttonText={"incorporating mock fighting strategies"} nextURL={"/fakefighting"} setURL={setURL}/>
+          <Navigation buttonText={"incorporating mock fighting strategies"} nextURL={"/fakefighting"} setURL={setURL} showNext={true}/>
 
           </div>
       </Grid>
+      </Fade>
     </Container>
   );
 }

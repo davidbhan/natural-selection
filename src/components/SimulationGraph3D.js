@@ -20,6 +20,8 @@ const isSamePop = (popStat1, popStat2) => {
 
 var convert = (inputArray) => {
 
+console.log(inputArray)
+
   let hawkData = inputArray.map(x => { 
     const container = {};
     container['y'] = x.hawk;
@@ -30,14 +32,14 @@ var convert = (inputArray) => {
   let crowData = inputArray.map(x => { 
     const container = {};
     container['y'] = x.crow;
-    container['label'] = x.crow;
+    container['label'] = x.round;
     return container
   });
 
   let doveData = inputArray.map(x => { 
     const container = {};
     container['y'] = x.dove;
-    container['label'] = x.dove;
+    container['label'] = x.round;
     return container
   });
 
@@ -88,9 +90,12 @@ export class Chart3D extends React.Component {
   render() {
     const options = {
         animationEnabled: true,	
+        title:{
+					text: this.props.title
+				},
         axisY : {
-          title: "Number of Birds",
-          includeZero: false
+          includeZero: false,
+          minimum: 0
         },
         toolTip: {
           shared: true

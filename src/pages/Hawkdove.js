@@ -147,7 +147,7 @@ export default function Hawkdove() {
             </Typography>
               </Box>
 
-            <Navigation buttonText={"How do we find an ESS?"} nextURL={"/hawkdovesimulation"} setURL={setURL}/>
+            <Navigation buttonText={"How do we find an ESS?"} nextURL={"/hawkdovesimulation"} setURL={setURL} showNext={false}/>
 
             </div>
         </Grid>

@@ -100,14 +100,11 @@ export default function Conclusion() {
         <Box lineHeight={2}>
       <Typography component="p">
           <br />
-          Unbeknowest to the participating animals, all of them were playing by the rules
-          of the complex game of life. Unlike them, however, you have the chance and the ability
-          to have a clearer idea of the world around you. 
-          <br />
-          <br />
+          We have shown that the evolution and natural selection of animal behaviors can in part
+          be explained by mathematical models. 
           Obviously, the rules of the game shown here are far
           simpler than those found in the real world, but this formaulation of thinking can be used
-          to explain not just the behavior of animals, but also of humans. (For example, why are children
+          to fundamentally think about a number of issues. (For example, why are children
           more likely to engage in fighting over treats and toys than adults? Think about the perceived cost of 
           fighting and value of treats in children compared to adults.)
           <br />

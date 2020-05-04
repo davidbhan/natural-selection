@@ -29,11 +29,17 @@ Released May 2020
 export class Navigation extends React.Component {
     constructor(props) {
       super(props);
+      this.state = {
+        showNext: this.props.showNext
+      };
+
     }
   
     render() {
       return (
       <Grid>
+
+        { !this.state.showNext ? 
         <Box>
         <br />
         <NavLink to={this.props.nextURL} style={{ textDecoration: 'none' }}>
@@ -42,6 +48,8 @@ export class Navigation extends React.Component {
           </Button>
         </NavLink>
         </Box>
+        : null }
+
   
       <Box>
         <br />

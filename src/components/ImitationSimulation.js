@@ -30,13 +30,13 @@ class PopulationStatistics {
 
 
 var initializePopulation = (p, v) => {
-  let out = [];
-  var i;
-  for (i = 0; i < Math.floor(p*v); i++) {
-    out[i] = new Bird(0, 0);
-  }
-  for (i = Math.floor(p*v); i < p; i++) {
-    out[i] = new Bird(1, 0);
+    let out = [];
+    var i;
+    for (i = 0; i < Math.floor(p*v); i++) {
+      out[i] = new Bird(0, 0);
+    }
+    for (i = Math.floor(p*v); i < p; i++) {
+      out[i] = new Bird(1, 0);
   }
   return out
 }
@@ -58,10 +58,27 @@ var updatePayoffs = (pop, v, d) => {
   for (const i of Array(pop.length).keys()) {
     let bird = pop[i]
     const opponent = pop[Math.floor(Math.random() * Math.floor(pop.length))]
-    bird.payoff = determinePayoff(v, d, bird, opponent)
+    bird.payoff += determinePayoff(v, d, bird, opponent) // Add to life points
   }
 }
 
+// Life Points simulation
+var updatePopulationNew = (pop, reproduce_thresh, effort_cost, kill_thresh) => {
+  for (const i of Array(pop.length).keys()) {
+    let bird = pop[i]; 
+    bird.payoff += effort_cost;
+    if (bird.payoff > reproduce_thresh) {
+      pop.push(new Bird(bird.strategy, 0));
+      bird.payoff = 0;
+    } else if (bird.payoff < kill_thresh) {
+      bird.strategy = parseInt(1 - bird.strategy);
+      bird.payoff = 0;
+    }
+  }
+}
+
+
+// Old imitation simulation
 var updatePopulation = (pop, k) => {
   for (const x of Array(k).keys()) {
     let bird = pop[Math.floor(Math.random() * Math.floor(pop.length))]; 
@@ -72,6 +89,7 @@ var updatePopulation = (pop, k) => {
   }
 }
 
+// Good
 var countPopulation = (population) => {
   let hawk = 0;
   let dove = 0;
@@ -83,7 +101,7 @@ var countPopulation = (population) => {
       dove += 1;
     }
   }
-  return [hawk, dove, (hawk)/(hawk+dove)];
+  return [hawk, dove, (hawk)/(population.length)];
 }
 
 export class ImitationSimulation extends React.Component {
@@ -106,12 +124,25 @@ export class ImitationSimulation extends React.Component {
       var x = new PopulationStatistics(i, hawk, dove, hawkRatio);
       popStats.push(x)
       updatePayoffs(population, this.props.v, this.props.d);
-      updatePopulation(population, this.props.k);
+      updatePopulationNew(population, this.props.r, this.props.e, this.props.k);
+      console.log('round', i)
     }
+    console.log(popStats)
     return popStats
   }
 
+  ratio = (popStats) => {
+    return popStats.map(x => { 
+      const container = {};
+      container['round'] = x.round;
+      container['hawk'] = x.hawkRatio;
+      container['dove'] = 1 - x.hawkRatio;
+      return container
+    });
+  }
+
   componentDidUpdate() {
+    console.log(this.state.run, this.props.run)
     if (this.state.run != this.props.run) {
       this.setState({
         run: this.props.run,
@@ -123,7 +154,8 @@ export class ImitationSimulation extends React.Component {
   render() {
     return (
       <Grid container justify="center">
-        <Chart popStats={this.state.popStats} run={this.state.run}/>
+        <Chart popStats={this.state.popStats} title={"Population Numbers Over Time"} yaxis={"Number of Birds"} run={this.state.run}/>
+        <Chart popStats={this.ratio(this.state.popStats)} title={"Population Ratio"} yaxis={"Ratio of Birds"}  run={this.state.run}/>
         <Grid>
           <br />
           <br />

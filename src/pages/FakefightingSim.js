@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Fade from '@material-ui/core/Fade';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PetsIcon from '@material-ui/icons/Pets';
@@ -44,14 +45,19 @@ export default function FakefightingSim() {
   const boxMarginTop = 0;
   const boxMarginBottom = 0;
   
-  const [v, setV] = React.useState(100)
-  const [d, setD] = React.useState(5);
+ 
+
+  const [v, setV] = React.useState(3)
+  const [d, setD] = React.useState(10);
   const [c, setC] = React.useState(1);
-  const [p, setP] = React.useState(500)
+  const [p, setP] = React.useState(100)
+  const [r, setR] = React.useState(5);
+  const [e, setE] = React.useState(-0.5);
   const [q, setQ] = React.useState(.10);
-  const [r, setR] = React.useState(.10);
-  const [k, setK] = React.useState(200)
-  const [n, setN] = React.useState(30);
+  const [l, setL] = React.useState(.10);
+  const [z, setZ] = React.useState(.80);
+  const [k, setK] = React.useState(-5)
+  const [n, setN] = React.useState(50);
 
   function setURL(newValue) {
     var currentURL = window.location.pathname;
@@ -79,7 +85,7 @@ export default function FakefightingSim() {
     setQ(e.target.value);
   }
   function handleRChange(e) {
-    setQ(e.target.value);
+    setR(e.target.value);
   }
   function handleKChange(e) {
     setK(e.target.value);
@@ -98,6 +104,8 @@ export default function FakefightingSim() {
   return (
     <Container component="main" maxWidth="md" className={classes.root}>
       <CssBaseline />
+      <Fade in={true} timeout={1500}>
+
       <Grid item component={Paper} elevation={6} square>
         <div className={classes.paper}>
         <NavLink to="/" style={{ textDecoration: 'none' }}>
@@ -107,7 +115,7 @@ export default function FakefightingSim() {
             </NavLink>
           <Typography component="h1" variant="h5" >
             <Box lineHeight={2}>
-              Multiplayer Simulation
+              Multi Strategy Simulation
             </Box>
           </Typography>
             <Box lineHeight={2} m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
@@ -116,20 +124,15 @@ export default function FakefightingSim() {
               for the damage the loser of a fight incurs. Furthemore, we have the initial population
               size, <i>p</i>, of the birds, and a value, <i>q</i>, that denotes the initial proportion
               of the population that uses a hawk strategy. Only now, we also include a value, <i>c</i>, for the cost
-              that a crow is willing to take and a value, <i>r</i> for the initial population size of the crows. Note that 
-              the sum of <i>q</i> and <i>r</i> must be less than 1. 
+              that a crow is willing to take and a value, <i>l</i> for the initial population proportion of the crows. Note that 
+              the sum of <i>q</i> and <i>l</i> must be less than 1. 
               <br />
               <br />
-              Each round, the birds will all be paired against a random matchup to play the game.
-              Their payoff values are computed and then stored. After each round, we choose a random number of birds, <i>k</i>, that 
-              will each be randomly compared to another bird. If the other bird
-              received a higher payoff, then the original bird will switch strategies to that of the other bird. Higher values of <i>k</i> will let 
-              the population proportion converge faster, but the convergence will be less stable.
+              The other values are the same as earlier, with <i>e</i> being the effort cost of living each turn, <i>r</i> being the reproductive threshold, and <i>k</i> being the "kill" threshold. In this case, 
+              when a bird "dies", the new strategy that the replacement bird takes is randomly decided from the other two strategies.
               We can run this simulation for <i>n</i> rounds and see how the population proportions tend to stabilize after a certain
-              number of rounds.              
-              <br />
-              <br />
-              To start, let us choose <i>v</i> = {v}, <i>d</i> = {d}, <i>c</i> = {c}, <i>p</i> = {p}, <i>q</i> = {q}, <i>r</i> = {r}, <i>k</i> = {k}, and <i>n</i> = {n} with the payoff matrix show below.
+              number of rounds.   
+              To start, let us choose <i>v</i> = {v}, <i>d</i> = {d}, <i>c</i> = {c}, <i>p</i> = {p}, <i>q</i> = {q}, <i>l</i> = l, <i>e</i> = {e}, <i>r</i> = {r}, <i>k</i> = {k}, and <i>n</i> = {n} with the payoff matrix show below.
           </Typography>
             </Box>
           <Box>
@@ -140,11 +143,9 @@ export default function FakefightingSim() {
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
           <Typography component="p">
               <br />
-              In other words, we start of with a population {p} birds, {p*q} of which play a hawk strategy, {p*r} of which play a crow strategy, 
-              and {p - p*q - p*r} of which play a dove strategy. After each round, {k} birds randomly check out the payoff of another bird and switches to their strategy if the other bird's payoff is 
-              better. We run this for {n} rounds, and see how the population proportion changes over time. 
+      
                Let us run the simulation
-              and see how it turns out! (Note that the simulation performance depends on random variable changes, so will change slightly each time.) 
+              and see how it turns out! 
               <br />
           </Typography>
             </Box>
@@ -156,7 +157,7 @@ export default function FakefightingSim() {
             { !showResults ? 
           <FormControlLabel
           control={
-            <Button variant="outlined" color="primary" onClick={computeSimulation}>
+            <Button variant="contained" color="secondary" onClick={computeSimulation}>
               Run Simulation
             </Button>}
         />
@@ -166,18 +167,25 @@ export default function FakefightingSim() {
 
           <Grid>
             { showResults ?  <Grid className={classes.paper}>
-              <ImitationSimulation3D v={parseInt(v)} d={parseInt(d)} c={parseInt(c)} p={parseInt(p)} q={parseFloat(q)} r={parseFloat(r)} k={parseInt(k)} n={parseInt(n)} run={run}/>
+            <ImitationSimulation3D v={parseInt(v)} d={parseInt(d)} c={parseInt(c)} p={parseInt(p)} n={parseInt(n)} q={parseFloat(q)} l={parseFloat(l)} r={parseFloat(r)} e={parseFloat(e)} k={parseFloat(k)}  run={run}/>
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
               <Typography component="p">
               <br />
-              That's pretty cool! In case you caught on beforehand, we see that the values in row 1 are greater or equal to those in
-              rows 2 and 3 for every column, so Hawk is clearly a theoretically stable strategy. 
-              Through this simulation, we got to see the population of hawks, crows, and doves converge roughly to this 
-              expected strategy.
-              Let's try out different starting values in our sandbox to how the population
-              proportion convertes to our predicted ESS.
+              That's pretty cool! With these sets of parameters,
+              we see that mock fighting is a good strategy to play and is part of the evolutionary stable strategy. This, our crow strategy
+               is known as a "worthwhile strategy"
+              since it is in use once the population has reached stability. Play around with different variables
+              to see how they impact the ESS in our sandbox!
               <br />
           </Typography>
+            </Box>
+            <Box>
+            <br />
+            <NavLink to={"/fakefightingsandbox"} style={{ textDecoration: 'none' }}>
+              <Button size="large" fullWidth={true} variant="contained" color="primary">
+                {"try out the sandbox"}
+              </Button>
+            </NavLink>
             </Box>
                   </Grid>
              : null }
@@ -186,10 +194,11 @@ export default function FakefightingSim() {
 
 
 
-          <Navigation buttonText={"try out the sandbox"} nextURL={"/fakefightingsandbox"} setURL={setURL}/>
+          <Navigation buttonText={"try out the sandbox"} nextURL={"/fakefightingsandbox"} setURL={setURL} showNext={true}/>
 
           </div>
       </Grid>
+      </Fade>
     </Container>
   );
 }

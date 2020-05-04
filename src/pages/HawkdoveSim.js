@@ -68,7 +68,7 @@ export default function HawkdoveSandbox() {
   return (
     <Container component="main" maxWidth="md" className={classes.root}>
       <CssBaseline />
-      <Fade in={true} timeout={2000}>
+      <Fade in={true} timeout={1500}>
 
       <Grid item component={Paper} elevation={6} square>
         <div className={classes.paper}>
@@ -90,7 +90,7 @@ export default function HawkdoveSandbox() {
               play the hawk strategy, and proceeds to dominate every other bird it encounters.
               As the bird get more food and resources, other birds see its success and also
               play the hawk strategy. Over time, the population of hawks skyrockets, while the population
-              of doves drop. The optimal balance of hawks and doves that we eventually reach is the ESS. 
+              of doves drop. The optimal balance of hawks and doves that we eventually should theoretically reach is the ESS. 
               Let's see if we can come up with a set of rules to determine the 
               ESS depending on the values of <i>v</i> and <i>d</i>.
               <br />
@@ -202,7 +202,7 @@ export default function HawkdoveSandbox() {
           </Typography>
             </Box>
 
-          <Navigation buttonText={"try out the sandbox"} nextURL={"/hawkdovesandbox"} setURL={setURL}/>
+          <Navigation buttonText={"try out the sandbox"} nextURL={"/hawkdovesandbox"} setURL={setURL}  showNext={false}/>
 
           </div>
       </Grid>

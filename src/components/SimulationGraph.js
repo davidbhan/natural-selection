@@ -19,7 +19,6 @@ const isSamePop = (popStat1, popStat2) => {
 }
 
 var convert = (inputArray) => {
-  console.log(inputArray);
 
   let hawkData = inputArray.map(x => { 
     const container = {};
@@ -31,7 +30,7 @@ var convert = (inputArray) => {
   let doveData = inputArray.map(x => { 
     const container = {};
     container['y'] = x.dove;
-    container['label'] = x.dove;
+    container['label'] = x.round;
     return container
   });
 
@@ -60,15 +59,12 @@ export class Chart extends React.Component {
     this.state = {
         popStats: this.props.popStats,
         data: convert(this.props.popStats),
-        run: this.props.run
-    };
+        run: this.props.run,
+      };
 
   }
 
   componentDidUpdate() {
-    console.log(this.state.popStats[50].hawk)
-    console.log(this.props.popStats[50].hawk)
-    console.log(isSamePop(this.state.popStats, this.props.popStats))
     if (!isSamePop(this.state.popStats, this.props.popStats)) {
       console.log('State changed!')
       this.setState({
@@ -81,9 +77,12 @@ export class Chart extends React.Component {
   render() {
     const options = {
         animationEnabled: true,	
+        title:{
+					text: this.props.title
+				},
         axisY : {
-          title: "Number of Birds",
-          includeZero: false
+          incldeZero: false,
+          minimum: 0
         },
         toolTip: {
           shared: true
