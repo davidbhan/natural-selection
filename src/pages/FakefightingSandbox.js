@@ -16,6 +16,7 @@ import Navigation from '../components/Footer.js';
 import ImitationSimulation3D from '../components/ImitationSimulation3D.js';
 import PayoffMatrix3D from '../components/PayoffMatrix3D.js';
 import { NavLink } from "react-router-dom";
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -169,18 +170,34 @@ export default function FakefightingSandbox() {
           </Box>
 
           <form autoComplete="off" className={classes.field}>
-            <TextField id="population" defaultValue={parseInt(p)} type="number" label="Population (p)" onChange={handlePChange}/>
+          {/* <Tooltip title="Initial population size of birds" arrow> */}
+            <TextField id="population" helperText="helper" defaultValue={parseInt(p)} type="number" label="Population (p)" onChange={handlePChange}/>
+          {/* </Tooltip> */}
+          {/* <Tooltip title="Number of rounds to run the simulation" arrow> */}
             <TextField id="rounds" defaultValue={parseInt(n)} type="number" label="Num. Rounds (n)" onChange={handleNChange}/>
+          {/* </Tooltip> */}
           </form>
           <form autoComplete="off" className={classes.field}>
+          {/* <Tooltip title="The initial ratio of hawks" arrow> */}
             <TextField id="hawks" defaultValue={parseFloat(q)} type="number" label="Hawk Ratio (q)" onChange={handleQChange}/>
+          {/* </Tooltip> */}
+          {/* <Tooltip title="The initial ratio of crows" arrow> */}
             <TextField id="crows" defaultValue={parseFloat(l)} type="number" label="Crow Ratio (l)" onChange={handleLChange}/>
+          {/* </Tooltip> */}
+          {/* <Tooltip title="The initial ratio of doves" arrow> */}
             <TextField disabled id="doves" value={parseFloat(z).toString().substring(0, 5)} label="Dove Ratio"/>
+          {/* </Tooltip> */}
           </form>
           <form autoComplete="off" className={classes.field}>
+          {/* <Tooltip title="If the bird's total payoff drops below this threshold (e.g. from taking damage), it will switch to a random new strategy" arrow> */}
             <TextField id="learningRate" defaultValue={parseFloat(k)} type="number" label="Kill (k)" onChange={handleKChange}/>
+          {/* </Tooltip> */}
+          {/* <Tooltip title="The total payoff score that a bird needs to replicate for another one of it's kind. On replication, it loses all of its life points" arrow> */}
             <TextField id="learningRate" defaultValue={parseFloat(r)} type="number" label="Reproduce (r)" onChange={handleRChange}/>
+          {/* </Tooltip> */}
+          {/* <Tooltip title="The cost of survival. The bird will lose this much from its total payoff each round" arrow> */}
             <TextField id="learningRate" defaultValue={parseFloat(e)} type="number" label="Effort (e)" onChange={handleEChange}/>
+          {/* </Tooltip> */}
           </form>
           <Box>
             <br />

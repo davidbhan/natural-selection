@@ -137,7 +137,7 @@ export default function HawkdoveSandbox() {
           <Typography component="p">
               <br />
               Okay, this is just a theoretical model, so how would this play out in the real world?
-              Let's run a simulation
+              Let's run a simulation.
               <br />
           </Typography>
             </Box>

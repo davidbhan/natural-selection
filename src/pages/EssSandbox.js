@@ -16,6 +16,7 @@ import Navigation from '../components/Footer.js';
 import ImitationSimulation from '../components/ImitationSimulation.js';
 import PayoffMatrix from '../components/PayoffMatrix2D.js';
 import { NavLink } from "react-router-dom";
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -197,9 +198,10 @@ export default function EssSandbox() {
             <TextField disabled id="doves" value={parseFloat(z)} type="number" label="Dove Ratio"/>
           </form>
           <form autoComplete="off" className={classes.field}>
-          <TextField id="learningRate" defaultValue={parseFloat(k)} type="number" label="Kill Threshold (k)" onChange={handleKChange}/>
-            <TextField id="learningRate" defaultValue={parseFloat(r)} type="number" label="Reproduce Threshold (r)" onChange={handleRChange}/>
-            <TextField id="learningRate" defaultValue={parseFloat(e)} type="number" label="Effort Cost (e)" onChange={handleEChange}/>
+            <TextField id="learningRate" defaultValue={parseFloat(k)} type="number" label="Kill (k)" onChange={handleKChange}/>
+            <TextField id="learningRate" defaultValue={parseFloat(k)} type="number" label="Kill (k)" onChange={handleKChange}/>
+            <TextField id="asdf" defaultValue={parseFloat(r)} type="number" label="Reproduce (r)" onChange={handleRChange}/>
+            <TextField id="sfa" defaultValue={parseFloat(e)} type="number" label="Effort (e)" onChange={handleEChange}/>
           </form>
           <Box>
             <br />
