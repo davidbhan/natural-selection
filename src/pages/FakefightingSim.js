@@ -115,7 +115,7 @@ export default function FakefightingSim() {
             </NavLink>
           <Typography component="h1" variant="h5" >
             <Box lineHeight={2}>
-              Multi Strategy Simulation
+               Mock Fighting  Simulation
             </Box>
           </Typography>
             <Box lineHeight={2} m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>

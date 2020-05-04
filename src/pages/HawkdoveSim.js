@@ -88,8 +88,7 @@ export default function HawkdoveSandbox() {
               But what exactly does that mean? 
               Suppose we have a population of birds that always play dove. One day a single bird decides to 
               play the hawk strategy, and proceeds to dominate every other bird it encounters.
-              As the bird get more food and resources, other birds see its success and also
-              play the hawk strategy. Over time, the population of hawks skyrockets, while the population
+              As the bird get more food and resources, it reproduces and has hawk children. Over time, the population of hawks skyrockets, while the population
               of doves drop. The optimal balance of hawks and doves that we eventually should theoretically reach is the ESS. 
               Let's see if we can come up with a set of rules to determine the 
               ESS depending on the values of <i>v</i> and <i>d</i>.
@@ -97,7 +96,7 @@ export default function HawkdoveSandbox() {
               <br />
               Look at the original payoff matrix below. It is clear that when the 
               the values of the first row are greater than the values of the second row,
-              a pure hawk strategy is the way to go regardless of what the others are doing.
+              always playing the hawk strategy is the way to go regardless of what the others are doing.
               This gives us our first condition of finding an ESS.
           </Typography>
             </Box>
@@ -170,7 +169,7 @@ export default function HawkdoveSandbox() {
               of Hawk and Dove strategies using a bit of basic algebra as well as the knowledge that 
               the evolutionary stable strategy must have the same or better payoff against any other strategy.
               We skip the algebra for brevity (<a href="https://en.wikipedia.org/wiki/Chicken_(game)">details here</a>), and
-              show the ideal ratio of hawks to doves is <i>v/d</i> hawks to <i>(1 - v/d)</i> doves. In other words, 
+              show the mathematically ideal ratio of hawks to doves is <i>v/d</i> hawks to <i>(1 - v/d)</i> doves. In other words, 
               the population would be resistant to change if the population consisted of a proportion 
               of <i>v/d</i> hawks.
           </Typography>

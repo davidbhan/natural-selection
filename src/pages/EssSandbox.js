@@ -228,6 +228,10 @@ export default function EssSandbox() {
                   This is because the rules of the simulation are a more complex game and introduce variations
                   such as kill threshold and a reproductive threshold. To see the simulation converge
                   to an ESS, set <i>e</i> = 0 and set the reproductive threshold, <i>r</i>, sufficiently high.
+                  
+                  <br />
+                  <br />
+                  
                   The simulation is a powerful tool that shows off the how a population of strategies
                   changes over time. But what if totally new strategies entered the population? What if an animal was willing
                   to put up a fighting display at a certain cost to try to scare away the doves?

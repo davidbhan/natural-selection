@@ -140,8 +140,7 @@ export default function Hawkdove() {
                 is doing, as we will see shortly.
 
                 The strategies that we want to find are ones that dominate other strategies  
-                over many iterations of this game as long as the majority
-                of a population uses it. These strategies are 
+                over many iterations of this game. These strategies are 
                  known as evolutionary stable strategies (ESSs).
                 <br />
             </Typography>

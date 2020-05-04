@@ -136,8 +136,8 @@ export default function HawkdoveSandbox() {
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
           <Typography component="p">
               <br />
-              Okay, this is just a theoretical model. How would things look if we 
-              actually ran a population simulation?
+              Okay, this is just a theoretical model, so how would this play out in the real world?
+              Let's run a simulation
               <br />
           </Typography>
             </Box>

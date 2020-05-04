@@ -132,7 +132,7 @@ export default function FakefightingSandbox() {
             </NavLink>
           <Typography component="h1" variant="h5" >
             <Box lineHeight={2}>
-              Multiplayer Simulation
+              Mock Fighting Sandbox
             </Box>
           </Typography>
             <Box lineHeight={2} m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
