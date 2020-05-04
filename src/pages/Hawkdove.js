@@ -99,7 +99,8 @@ export default function Hawkdove() {
                 both choose to fight (Hawk), you both have an equal chance of winning the entire value of 
                 of the fruit, but also an equal chance of losing the fight and taking a 
                 damage penalty for losing. We can model
-                this through a payoff matrix that shows the outcomes of each matchup below: 
+                this through a payoff matrix that shows the outcomes of each matchup below. In a payoff matrix like this,
+                you are represented by the players along the left hand side.  
                 (Hover over the cells for an explanation of how they are calculated!)
                 <br />
                 <br />

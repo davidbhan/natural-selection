@@ -124,14 +124,13 @@ export default function FakefightingSandbox() {
           <Typography component="p" >
             <Box lineHeight={2} m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
             Input the starting parameters of the population of your choice and then hit the start simulation button once you are satisfied with the payoff matrix and population parameters of your choice. Note that higher values of k will allow the population to change far quicker, but the final result will be less stable.
-            </Box>
+            For more stable results, try <i>k</i> = 10 and <i>n</i> = 2000.</Box>
           </Typography>
           <Box>
             <br />
           </Box>
               <Grid className={classes.paper}>
-              There is some weird behavior with
-              autoupdating, so be sure to click the run simulation button each time you change the parameters! If anything breaks, just refresh the page :)
+              Since all the computation is done in your browser, there may be a bit of lag with large inputs. Be sure to click the run simulation button each time you change the parameters! If anything breaks, just refresh the page :)
                 
               </Grid>
           <Box>

@@ -29,9 +29,12 @@ function setValue(newValue) {
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
+                        <Link href="https://webapp.science.hku.hk/sr4/servlet/enquiry?Type=Course&course_code=MATH3911" variant="body2">
+                    {"MATH3911 Game Theory"}
+                  </Link>
+                  <br />
       The University of Hong Kong 
       <br />
-
       Released May 2020
     </Typography>
   );
@@ -47,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundPosition: 'left',
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -106,7 +109,7 @@ export default function Conclusion() {
           simpler than those found in the real world, but this formaulation of thinking can be used
           to explain not just the behavior of animals, but also of humans. (For example, why are children
           more likely to engage in fighting over treats and toys than adults? Think about the perceived cost of 
-          fighting and value of treats in children compared to adults)
+          fighting and value of treats in children compared to adults.)
         </Box>
 
         <Box>
@@ -152,7 +155,11 @@ export default function Conclusion() {
         </Box>
 
         <Fade in={true} timeout={3000}>
-        <Box>
+        <Grid container className={classes.paper}>
+            <Grid>
+                  Go back to the tools here!
+                  <br />
+            </Grid>
           <BottomNavigation
             onChange={(event, newValue) => {
               setValue(newValue);
@@ -164,26 +171,12 @@ export default function Conclusion() {
               <BottomNavigationAction label="Mock Fighting Simulation" value="fakefightingsandbox" icon={<SportsKabaddiIcon />} />
 
           </BottomNavigation>
-        </Box>
+        </Grid>
         </Fade>
         <Box>
           <br />
         </Box>
         
-        <Fade in={true} timeout={3000}>
-            <Grid container>
-              <Grid item xs>
-                <Link href="https://www.linkedin.com/in/davidbhan/" variant="body2">
-                  David Boli Han
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="https://webapp.science.hku.hk/sr4/servlet/enquiry?Type=Course&course_code=MATH3911" variant="body2">
-                  {"MATH3911 Game Theory"}
-                </Link>
-              </Grid>
-            </Grid>
-        </Fade>
         <Fade in={true} timeout={3000}>
           <Box mt={3} >
             <Copyright />

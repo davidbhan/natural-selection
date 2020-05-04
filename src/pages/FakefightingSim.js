@@ -120,14 +120,14 @@ export default function FakefightingSim() {
               Each round, the birds will all be paired against a random matchup to play the game.
               Their payoff values are computed and then stored. After each round, we choose a random number of birds, <i>k</i>, that 
               will each be randomly compared to another bird. If the other bird
-              received a higher payoff, then the original bird will switch strategies to that of the other bird. Higher values of k will let 
+              received a higher payoff, then the original bird will switch strategies to that of the other bird. Higher values of <i>k</i> will let 
               the population proportion converge faster, but the convergence will be less stable.
-              We can run this simulation for n rounds and see how the population proportions tend to stabilize after a certain
+              We can run this simulation for <i>n</i> rounds and see how the population proportions tend to stabilize after a certain
               number of rounds.              
             </Box>
             <Box lineHeight={2}  m={boxMargin} mt={boxMarginTop} mb={boxMarginBottom}>
               <br />
-              To start, let us choose v = {v}, d = {d}, c = {c}, p = {p}, q = {q}, r = {r}, k = {k}, and n = {n} with the payoff matrix show below.
+              To start, let us choose <i>v</i> = {v}, <i>d</i> = {d}, <i>c</i> = {c}, <i>p</i> = {p}, <i>q</i> = {q}, <i>r</i> = {r}, <i>k</i> = {k}, and <i>n</i> = {n} with the payoff matrix show below.
             </Box>
           </Typography>
           <Box>

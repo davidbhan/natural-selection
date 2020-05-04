@@ -107,8 +107,8 @@ export default function HawkdoveSandbox() {
 
           
           <form autoComplete="off" className={classes.field}>
-            <TextField id="value" placeholder={parseInt(v)} type="number" label="Value" onChange={handleVChange}/>
-            <TextField id="damage" placeholder={parseInt(d)} type="number" label="Damage" onChange={handleDChange}/>
+            <TextField id="value" defaultValue={parseInt(v)} type="number" label="Value" onChange={handleVChange}/>
+            <TextField id="damage" defaultValue={parseInt(d)} type="number" label="Damage" onChange={handleDChange}/>
           </form>
           <Box>
             <br />

@@ -15,8 +15,6 @@ import FakefightingSandbox from "./pages/FakefightingSandbox";
 import Conclusion from "./pages/Conclusion";
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-
-import "./css/balloon.css";
 import "./css/App.css";
 
 

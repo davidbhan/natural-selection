@@ -17,13 +17,12 @@ import { NavLink } from "react-router-dom";
 function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://www.linkedin.com/in/davidbhan/">
-          David Boli Han
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
+
+<br />
+The University of Hong Kong 
+<br />
+Released May 2020
+</Typography>
     );
   }
 

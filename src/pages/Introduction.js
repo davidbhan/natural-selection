@@ -21,6 +21,10 @@ import { NavLink } from "react-router-dom";
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
+                        <Link href="https://webapp.science.hku.hk/sr4/servlet/enquiry?Type=Course&course_code=MATH3911" variant="body2">
+                    {"MATH3911 Game Theory"}
+                  </Link>
+                  <br />
       The University of Hong Kong 
       <br />
       Released May 2020
@@ -45,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundPosition: 'left',
   },
   paper: {
     margin: theme.spacing(4, 4),
@@ -169,19 +173,8 @@ export default function Introduction() {
           </Box>
           <Fade in={true} timeout={3000}>
           <Grid container>
-            <Grid container>
-              <Grid item xs>
-                <Link href="https://www.linkedin.com/in/davidbhan/" variant="body2">
-                  David Boli Han
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="https://webapp.science.hku.hk/sr4/servlet/enquiry?Type=Course&course_code=MATH3911" variant="body2">
-                  {"MATH3911 Game Theory"}
-                </Link>
-              </Grid>
-            </Grid>
             <Grid container className={classes.paper}>
+
                 <Copyright />
             </Grid>
           </Grid>

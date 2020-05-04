@@ -136,8 +136,7 @@ export default function EssSandbox() {
             <br />
           </Box>
               <Grid className={classes.paper}>
-              There is some weird behavior with
-              autoupdating, so be sure to click the run simulation button each time you change the parameters! If anything breaks, just refresh the page :)
+              Since all the computation is done in your browser, there may be a bit of lag with large inputs. Be sure to click the run simulation button each time you change the parameters! If anything breaks, just refresh the page :)
                 
               </Grid>
           <Box>

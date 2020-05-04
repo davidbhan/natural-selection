@@ -23,15 +23,21 @@ export class PayoffMatrix extends React.Component {
             <TableHead>
               <TableRow>
                 <TableCell> </TableCell>
-                <TableCell align="right"><b>Hawk</b></TableCell>
-                <TableCell align="right"><b>Dove</b></TableCell>
+                <Tooltip title="This is your opponent!" arrow>
+                  <TableCell align="right"><b>Hawk</b></TableCell>
+                </Tooltip>
+                <Tooltip title="This is your opponenet!" arrow>
+                  <TableCell align="right"><b>Dove</b></TableCell>
+                </Tooltip>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow key="row0">
-                <TableCell component="th" scope="row">
-                  <b>Hawk</b>
-                </TableCell>
+                <Tooltip title="This is your strategy!" arrow>
+                  <TableCell component="th" scope="row">
+                    <b>Hawk</b>
+                  </TableCell>
+                </Tooltip>
                 <Tooltip title="Computed as (v-d)/2 since there is equal probability of both winning and getting the value of the fruit or losing and getting nothing" arrow>
                   <TableCell align="right">{(this.props.v-this.props.d)/2}</TableCell>
                 </Tooltip>
@@ -40,9 +46,11 @@ export class PayoffMatrix extends React.Component {
                 </Tooltip>
               </TableRow>
               <TableRow key="row1">
-                <TableCell component="th" scope="row">
-                  <b>Dove</b>
-                </TableCell>
+              <Tooltip title="This is your strategy!" arrow>
+                  <TableCell component="th" scope="row">
+                    <b>Dove</b>
+                  </TableCell>
+                </Tooltip>
                 <Tooltip title="This will always be 0 since your opponent will always get the full value of the food and you will get none" arrow>
                   <TableCell align="right">0</TableCell>
                 </Tooltip>
