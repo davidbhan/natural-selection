@@ -10,8 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PetsIcon from '@material-ui/icons/Pets';
 import React from 'react';
-import Navigation from '../components/Footer.js';
-import PayoffMatrix3D from '../components/PayoffMatrix3D.js';
+import Navigation from '../components/Footer.jsx';
+import PayoffMatrix3D from '../components/PayoffMatrix3D.jsx';
 import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -114,8 +114,8 @@ export default function Fakefighting() {
                 Clearly it can pay off to be a crow rather than a dove in certain situations. 
                 Try adjusting the values in the form below to see its effect on the payoff matrix above.
                 You can also hover over a table cell to see how that value is computed. (Note that
-                in this scenario, we always assume c > 0 and d > c. If c = 0, the the crow is just a dove.
-                If c > d, then we can simply change the labels for the hawk and the crow.)
+                in this scenario, we always assume c &gt; 0 and d &gt; c. If c = 0, the the crow is just a dove.
+                If c &gt; d, then we can simply change the labels for the hawk and the crow.)
                 <br />
             </Typography>
               </Box>

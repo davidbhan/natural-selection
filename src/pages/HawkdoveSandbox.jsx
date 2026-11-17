@@ -10,8 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PetsIcon from '@material-ui/icons/Pets';
 import React from 'react';
-import Navigation from '../components/Footer.js';
-import PayoffMatrix from '../components/PayoffMatrix2D.js';
+import Navigation from '../components/Footer.jsx';
+import PayoffMatrix from '../components/PayoffMatrix2D.jsx';
 import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
