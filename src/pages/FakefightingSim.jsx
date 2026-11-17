@@ -11,9 +11,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PetsIcon from '@material-ui/icons/Pets';
 import React from 'react';
-import Navigation from '../components/Footer.js';
-import ImitationSimulation3D from '../components/ImitationSimulation3D.js';
-import PayoffMatrix3D from '../components/PayoffMatrix3D.js';
+import Navigation from '../components/Footer.jsx';
+import ImitationSimulation3D from '../components/ImitationSimulation3D.jsx';
+import PayoffMatrix3D from '../components/PayoffMatrix3D.jsx';
 import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({

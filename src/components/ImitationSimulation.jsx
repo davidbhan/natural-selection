@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Tooltip from '@material-ui/core/Tooltip';
 import Table from '@material-ui/core/Table';
 import Box from '@material-ui/core/Box';
-import Chart from './SimulationGraph.js'
+import Chart from './SimulationGraph.jsx'
 
 class Bird {
   constructor(strategy, payoff) {

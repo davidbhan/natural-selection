@@ -1,6 +1,6 @@
 
 import React from 'react';
-import CanvasJSReact from './canvasjs.react.js';
+import CanvasJSReact from './canvasjs.react.jsx';
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const isSamePop = (popStat1, popStat2) => {
@@ -20,18 +20,9 @@ const isSamePop = (popStat1, popStat2) => {
 
 var convert = (inputArray) => {
 
-console.log(inputArray)
-
   let hawkData = inputArray.map(x => { 
     const container = {};
     container['y'] = x.hawk;
-    container['label'] = x.round;
-    return container
-  });
-
-  let crowData = inputArray.map(x => { 
-    const container = {};
-    container['y'] = x.crow;
     container['label'] = x.round;
     return container
   });
@@ -55,31 +46,27 @@ console.log(inputArray)
     name: "Doves",
     showInLegend: true,
     dataPoints: doveData
-  },
-  {
-    type: "spline",
-    name: "Crows",
-    showInLegend: true,
-    dataPoints: crowData
   }]
 
+  console.log(data);
   return data;
 }
 
 
-export class Chart3D extends React.Component {
+export class Chart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
         popStats: this.props.popStats,
         data: convert(this.props.popStats),
-        run: this.props.run
-    };
+        run: this.props.run,
+      };
 
   }
 
   componentDidUpdate() {
     if (!isSamePop(this.state.popStats, this.props.popStats)) {
+      console.log('State changed!')
       this.setState({
         popStats: this.props.popStats,
         data: convert(this.props.popStats),
@@ -94,7 +81,7 @@ export class Chart3D extends React.Component {
 					text: this.props.title
 				},
         axisY : {
-          includeZero: false,
+          incldeZero: false,
           minimum: 0
         },
         toolTip: {
@@ -110,4 +97,4 @@ export class Chart3D extends React.Component {
   }
 
 
-export default Chart3D;
+export default Chart;
